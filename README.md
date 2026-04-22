@@ -27,7 +27,7 @@ CI/CD:
 
 - CI workflow: `.github/workflows/ci.yml`
 - CD workflow: `.github/workflows/cd.yml`
-- CD validates the stack, runs smoke and CRUD tests, then publishes frontend and backend images to GitHub Container Registry.
+- CD validates the stack, runs smoke and CRUD tests, then publishes frontend and backend images to Docker Hub.
 
 Open:
 
@@ -42,3 +42,4 @@ Notes:
 - PostgreSQL is only exposed inside the Docker network, not on the host.
 - Local secret files such as `.env` and `backend-php/.env` are ignored. Use `.env.example` files as templates.
 - Stable builds are packaged as versioned Docker images by the CD workflow.
+- Docker Hub publishing requires GitHub repository secrets named `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN`.

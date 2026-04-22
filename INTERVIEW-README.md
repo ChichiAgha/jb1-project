@@ -323,20 +323,27 @@ It performs:
 - smoke tests
 - backend CRUD tests
 - Docker Buildx setup
-- GitHub Container Registry login
+- Docker Hub login
 - frontend image build and push
 - backend image build and push
 
-Images are published to GitHub Container Registry:
+Images are published to Docker Hub:
 
 ```text
-ghcr.io/<github-owner>/taskapp-frontend:<commit-sha>
-ghcr.io/<github-owner>/taskapp-frontend:latest
-ghcr.io/<github-owner>/taskapp-backend:<commit-sha>
-ghcr.io/<github-owner>/taskapp-backend:latest
+<dockerhub-username>/taskapp-frontend:<commit-sha>
+<dockerhub-username>/taskapp-frontend:latest
+<dockerhub-username>/taskapp-backend:<commit-sha>
+<dockerhub-username>/taskapp-backend:latest
 ```
 
 This is continuous delivery: after the app passes checks, it produces versioned Docker images that are ready to deploy.
+
+The workflow expects these GitHub repository secrets:
+
+```text
+DOCKERHUB_USERNAME
+DOCKERHUB_TOKEN
+```
 
 A future deployment target could extend this workflow to:
 
@@ -347,7 +354,7 @@ A future deployment target could extend this workflow to:
 
 Interview explanation:
 
-> CI validates every change. CD runs the same checks, then builds and publishes versioned frontend and backend Docker images to GitHub Container Registry. That means a stable commit produces deployable artifacts automatically.
+> CI validates every change. CD runs the same checks, then builds and publishes versioned frontend and backend Docker images to Docker Hub. That means a stable commit produces deployable artifacts automatically.
 
 ## Implementation Steps
 
@@ -495,13 +502,13 @@ A simple way to present the project:
 9. Show the smoke test and run it.
 10. Show the CRUD test and run it.
 11. Show the GitHub Actions CI workflow.
-12. Show the GitHub Actions CD workflow and explain the GHCR image tags.
+12. Show the GitHub Actions CD workflow and explain the Docker Hub image tags.
 
 ## Strong Interview Summary
 
 You can say:
 
-> This is a Dockerized full-stack task app. The frontend is a React app built with Vite, compiled in a Node build stage, and served by Nginx in a separate runtime image. Nginx also proxies `/api` requests to a PHP backend. The backend uses PDO to connect to PostgreSQL, runs database migrations before startup, and the database is only available inside the Docker network. I added healthchecks, service readiness dependencies, cache headers, gzip, smoke tests, CRUD tests, CI, and CD image publishing to GitHub Container Registry.
+> This is a Dockerized full-stack task app. The frontend is a React app built with Vite, compiled in a Node build stage, and served by Nginx in a separate runtime image. Nginx also proxies `/api` requests to a PHP backend. The backend uses PDO to connect to PostgreSQL, runs database migrations before startup, and the database is only available inside the Docker network. I added healthchecks, service readiness dependencies, cache headers, gzip, smoke tests, CRUD tests, CI, and CD image publishing to Docker Hub.
 
 ## Tradeoffs And Next Improvements
 
