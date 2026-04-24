@@ -15,7 +15,7 @@ Features:
 Run in your WSL shell:
 
 ```bash
-cd ~/projects/webforx/job-project
+cd ~/projects/webforx/jb1-project
 docker compose down -v
 docker compose up -d --build
 curl http://localhost:8000/api/health

@@ -1,0 +1,15 @@
+vpc = {
+  aws_region           = "eu-west-2"
+  availability_zones   = ["eu-west-2a", "eu-west-2b"]
+  cidr_block           = "10.20.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+  control_plane_names  = ["taskapp-sandbox"]
+  enable_nat_gateway   = true
+  nat_gateway_count    = 1
+  name_prefix          = "taskapp-sbx"
+  tags = {
+    Environment = "sandbox"
+    Project     = "jb1-project"
+  }
+}

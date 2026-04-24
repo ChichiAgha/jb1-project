@@ -1,0 +1,21 @@
+ecr = {
+  aws_region = "eu-west-2"
+  repository_names = [
+    "taskapp/frontend",
+    "taskapp/backend"
+  ]
+  force_delete         = false
+  image_tag_mutability = "IMMUTABLE"
+  scan_on_push         = true
+  encryption_type      = "AES256"
+  lifecycle_policy = {
+    enabled              = true
+    max_image_count      = 30
+    expire_untagged_days = 14
+  }
+  name_prefix = "taskapp-prod"
+  tags = {
+    Environment = "production"
+    Project     = "jb1-project"
+  }
+}

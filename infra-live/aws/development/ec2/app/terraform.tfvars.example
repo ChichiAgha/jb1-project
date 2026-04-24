@@ -1,0 +1,41 @@
+vpc_remote_state = {
+  bucket = "jb1-project-development-tf-state"
+  key    = "development/vpc/terraform.tfstate"
+  region = "eu-west-2"
+}
+
+app_stack = {
+  aws_region  = "eu-west-2"
+  name_prefix = "taskapp-dev"
+  security = {
+    alb_ingress_cidrs = ["0.0.0.0/0"]
+    app_port          = 80
+  }
+  load_balancer = {
+    listener_port     = 80
+    target_port       = 80
+    health_check_path = "/api/health"
+    certificate_arn   = null
+  }
+  compute = {
+    instance_type    = "t3.small"
+    desired_capacity = 1
+    min_size         = 1
+    max_size         = 2
+    dockerhub_username = "your-dockerhub-username"
+    image_tag          = "latest"
+    backend_env = {
+      app_env     = "development"
+      app_debug   = "true"
+      db_host     = "your-postgres-host"
+      db_port     = "5432"
+      db_database = "taskapp"
+      db_username = "taskuser"
+      db_password = "change-me"
+    }
+  }
+  tags = {
+    Environment = "development"
+    Project     = "jb1-project"
+  }
+}

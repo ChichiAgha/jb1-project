@@ -1,0 +1,15 @@
+s3_backend = {
+  aws_region_main         = "eu-west-2"
+  aws_region_backup       = "eu-west-1"
+  bucket_name             = "jb1-project-development-tf-state"
+  force_destroy           = true
+  enable_versioning       = true
+  enable_replication      = true
+  dynamodb_read_capacity  = 20
+  dynamodb_write_capacity = 20
+  name_prefix             = "taskapp-dev"
+  tags = {
+    Environment = "development"
+    Project     = "jb1-project"
+  }
+}
